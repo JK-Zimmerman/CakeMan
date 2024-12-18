@@ -9,7 +9,7 @@ Last updated: 2024 12 17
 import sqlite3
 
 class Liege:
-    def __init__(self, liege:int = 0, storagefile:str = "documents\\CakeMan_Bot\\liege.db"): # 0 means no liege
+    def __init__(self, liege:int = 0, storagefile:str = "liege.db"): # 0 means no liege
         self.conn = sqlite3.connect(storagefile)
         self.curr = self.conn.cursor()
         self.make_liege_record(liege)
