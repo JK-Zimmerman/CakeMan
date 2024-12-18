@@ -7,7 +7,7 @@ import sqlite3
 
 class Leaderboard_Manager:
     #object to manage the leaderboard
-    def __init__(self, word:str = 'point', plural:str = 's', storagefile:str = "documents\\CakeMan_Bot\\leaderboard.db") -> None: 
+    def __init__(self, word:str = 'point', plural:str = 's', storagefile:str = "leaderboard.db") -> None: 
         self.word = word
         self.plural = plural
         self.con = sqlite3.connect(storagefile)
