@@ -6,7 +6,7 @@ Last updated: 2024 12 16
 import sqlite3
 
 class Authenticator:
-    def __init__ (self, storagefile = "documents\\CakeMan_Bot\\authenticate.db"):
+    def __init__ (self, storagefile = "authenticate.db"):
         self.conec = sqlite3.connect(storagefile)
         self.cursor = self.conec.cursor()
 
