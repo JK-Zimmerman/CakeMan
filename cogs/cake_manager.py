@@ -15,8 +15,8 @@ from zoneinfo import ZoneInfo
 
 
 class CakeManager(commands.Cog, Leaderboard_Manager, Authenticator, Liege):
-    def __init__(self, bot, liege = 317740007605534722, timezone:str = 'America/Los_Angeles', rcrdstoragefile:str = "authenticate.db",
-                 ldrbrdstoragefile:str = "leaderboard.db", lstorage_file = 'liege.db'):
+    def __init__(self, bot, liege = 317740007605534722, timezone:str = 'America/Los_Angeles', rcrdstoragefile:str = ".\\cogs\\modules\\authenticate.db",
+                 ldrbrdstoragefile:str = ".\\cogs\\modules\\leaderboard.db", lstorage_file = '.\\cogs\\modules\\liege.db'):
         self.bot = bot
         self.timezone = ZoneInfo(timezone)
 
