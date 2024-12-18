@@ -11,8 +11,8 @@ from discord.ext import commands
 import matplotlib.pyplot as plt
 
 class PartyManager(commands.Cog, Leaderboard_Manager, Authenticator, Liege):
-    def __init__(self, bot, liege = 0, rcrdstoragefile:str = "authenticate.db",
-                 ldrbrdstoragefile:str = "leaderboard.db", lstorage_file = 'liege.db'):
+    def __init__(self, bot, liege = 0, rcrdstoragefile:str = ".\\cogs\\modules\\authenticate.db",
+                 ldrbrdstoragefile:str = ".\\cogs\\modules\\leaderboard.db", lstorage_file = '.\\cogs\\modules\\liege.db'):
         self.bot = bot
         self.liege = liege
 
