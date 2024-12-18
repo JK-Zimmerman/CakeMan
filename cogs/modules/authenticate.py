@@ -25,14 +25,14 @@ class Authenticator:
     def addDate(self, year:int, month:int, day:int) -> None: #adds provided date
         self.cursor.execute("INSERT INTO record VALUES (?, ?, ?)", (year, month, day))
         self.conec.commit()
-        return f"{year} {month} {day} added to records."
+        return f"{year} {month:02} {day:02} added to records."
 
     def deleteDate(self, year:int, month:int, day:int) -> str: #deletes provided date from records
         val = self.cursor.execute("SELECT * FROM record WHERE year = ? AND month = ? AND day = ?", (year, month, day)).fetchone()
         if val is not None: #if query exists
             self.cursor.execute("DELETE FROM record WHERE year = ? AND month = ? AND day = ?", (year, month, day))
             self.conec.commit()
-            return f"{year} {month} {day} has been deleted from records."
+            return f"{year} {month:02} {day:02} has been deleted from records."
         return "Date not found in records."
     
     def authenticateToday(self, year:int, month:int, day:int) -> bool: # returns True if there is no record of today
