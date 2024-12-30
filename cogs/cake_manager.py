@@ -2,7 +2,7 @@
 cake_manager.py
 Like a cake is the heart of a birthday, CakeManager is the heart of maintaining CakeMan. It is responsible for actually counting bithdays, as well as
 related functionalities like aunthenticating birthdays.
-Last updated: 2024 12 16
+Last updated: 2024 12 28
 '''
 import discord 
 import regex as re
@@ -16,7 +16,7 @@ from zoneinfo import ZoneInfo
 
 class CakeManager(commands.Cog, Leaderboard_Manager, Authenticator, Liege):
     def __init__(self, bot, liege = 317740007605534722, timezone:str = 'America/Los_Angeles', rcrdstoragefile:str = ".\\cogs\\modules\\authenticate.db",
-                 ldrbrdstoragefile:str = ".\\cogs\\modules\\leaderboard.db", lstorage_file = '.\\cogs\\modules\\liege.db'):
+                 ldrbrdstoragefile:str = ".\\cogs\\modules\\leaderboard.db", lstorage_file = '.\\cogs\modules\\liege.db'):
         self.bot = bot
         self.timezone = ZoneInfo(timezone)
 
@@ -35,18 +35,19 @@ class CakeManager(commands.Cog, Leaderboard_Manager, Authenticator, Liege):
             today = [int(i) for i in today.split('-')]
             if self.authenticateToday(today[0], today[1], today[2]): #checks if there is a record of someone else giving birthday wishes today
                 if self.authenticateAllTime(today[1], today[2]): #check if theres a record of this being a birthday in past years (in case of late wishes, or other edge case)
-                    self.addDate(today[0], today[1], today[2]) #if record exists, add it. Below logic accounts for Member and User cases. I don't understand when each happens, so just in case
+                    # Below logic accounts for Member and User cases. I don't understand when each happens, so just in case
                     if type(message.author) == discord.Member: 
-                        self.update(message.author.name)
+                        self.update('<@' + str(message.author.id) + '>')
                     else:
                         self.update(message.author)
+                    self.addDate(today[0], today[1], today[2]) #add record of today
                 else:  #if there is no record of this being a birthday, get approval
                     if not self.exists_liege() or await self.get_approval(message): #either there is no liege, or approval is attained from liege
-                        self.addDate(today[0], today[1], today[2])
                         if type(message.author) == discord.Member:
-                            self.update(message.author.name)
+                            self.update('<@' + str(message.author.id) + '>')
                         else:
                             self.update(message.author)
+                        self.addDate(today[0], today[1], today[2])
                     
     async def get_approval(self, message: discord.Message, timeout = None) -> bool: #seeks approval from liege, returns true if given 
         # gets approval from liege for message that can't be verified via dm reaction
